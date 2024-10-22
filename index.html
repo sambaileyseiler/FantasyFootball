@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fantasy Optimizer</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Fantasy Football Optimizer</h1>
+    <form method="POST">
+        <label for="QB">Number of QBs:</label>
+        <input type="number" id="QB" name="QB" min="0" value="1"><br>
+
+        <label for="RB">Number of RBs:</label>
+        <input type="number" id="RB" name="RB" min="0" value="2"><br>
+
+        <label for="WR">Number of WRs:</label>
+        <input type="number" id="WR" name="WR" min="0" value="4"><br>
+
+        <label for="TE">Number of TEs:</label>
+        <input type="number" id="TE" name="TE" min="0" value="1"><br>
+
+        <label for="FLEX">Number of FLEX:</label>
+        <input type="number" id="FLEX" name="FLEX" min="0" value="0"><br>
+
+        <label for="DST">Number of DSTs:</label>
+        <input type="number" id="DST" name="DST" min="0" value="1"><br><br>
+
+        <label for="SALARY_CAP">Salary Cap:</label>
+        <input type="number" id="SALARY_CAP" name="SALARY_CAP" value="50000"><br>
+
+        <label for="OWN_CEILING">Ownership Ceiling:</label>
+        <input type="number" id="OWN_CEILING" name="OWN_CEILING" value="150"><br>
+
+        <label for="CEIL_FLOOR">Ceiling Floor:</label>
+        <input type="number" id="CEIL_FLOOR" name="CEIL_FLOOR" value="200"><br><br>
+
+        <input type="submit" value="Optimize">
+    </form>
+
+    <h2>Optimization Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Position</th>
+                <th>Selected</th>
+                <th>Score</th>
+                <th>Cost</th>
+                <th>Ownership</th>
+                <th>Ceiling</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for player, details in solution.items() %}
+                <tr>
+                    <td>{{ player }}</td>
+                    <td>{{ details.position }}</td>
+                    <td>{{ details.selected }}</td>
+                    <td>{{ details.score }}</td>
+                    <td>{{ details.constraints.cost }}</td>
+                    <td>{{ details.constraints.ownership }}</td>
+                    <td>{{ details.constraints.ceiling }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
